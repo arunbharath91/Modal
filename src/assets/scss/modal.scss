@@ -53,38 +53,32 @@ button.close {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1050;
-  display: none;
-  overflow: hidden;
   -webkit-overflow-scrolling: touch;
   outline: 0;
   background: rgba(0,0,0,0.2);
-}
-
-
-.modal.show .modal-dialog {
-  -webkit-transform: translate(0, 0);
-  -ms-transform: translate(0, 0);
-  -o-transform: translate(0, 0);
-  transform: translate(0, 0);
-}
-
-.modal-open .modal {
-  overflow-x: hidden;
-  overflow-y: auto;
 }
 
 .modal-dialog {
   position: relative;
   width: auto;
   margin: 10px;
-  -webkit-transition: -webkit-transform 0.3s ease-out;
-  -o-transition: -o-transform 0.3s ease-out;
-  transition: transform 0.3s ease-out;
-  -webkit-transform: translate(0, -25%);
-  -ms-transform: translate(0, -25%);
-  -o-transform: translate(0, -25%);
-  transform: translate(0, -25%);
+  -webkit-animation: modalIn 0.2s ease-in;
+  animation: modalIn 0.2s ease-in;
+}
+@keyframes modalIn {
+  0% {
+    -webkit-transform: translate(0, -25%);
+    -ms-transform: translate(0, -25%);
+    -o-transform: translate(0, -25%);
+    transform: translate(0, -25%);
+  }
+
+  100% {
+    -webkit-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    transform: translate(0, 0);
+  }
 }
 
 .modal-content {
@@ -119,6 +113,12 @@ button.close {
   padding: 15px;
 }
 
+.view-container {
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+}
+
 .modal-footer {
   padding: 15px;
   text-align: right;
@@ -145,6 +145,42 @@ button.close {
   height: 50px;
   overflow: scroll;
 }
+
+.loader {
+  width: 100%;
+  background: #f6f6f6;
+  height: 100%;
+  display: flex;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+
+.loader::after {
+  content: '';
+  border: 5px solid #f3f3f3;
+  -webkit-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+  border-top: 5px solid #555;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  left: calc(50% - 30px);
+  top: calc(50% - 20px);
+  transform: translate(-50%, -50%);
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
 @media (min-width: 768px) {
   .modal-dialog {
     width: 600px;
@@ -156,12 +192,12 @@ button.close {
     box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
   }
 
-  .modal-sm {
+  .sm {
     width: 300px;
   }
 }
 @media (min-width: 992px) {
-  .modal-lg {
+  .lg {
     width: 900px;
   }
 }
