@@ -54,7 +54,7 @@ export class Modal {
 
   protected registerCloseEvent(modal: HTMLElement) {
   (modal.querySelector('[data-dismiss="modal"]') as HTMLElement).addEventListener('click', () => {
-      if (this.options.onClose) {this.options.onClose.call(this)};
+      if (this.options.onClose) { this.options.onClose.call(this) };
       modal.remove();
       modalIndex--;
   });
