@@ -1,27 +1,35 @@
 interface IOptions {
-  size: string;
+  size?: string;
+  onOpen ? : Function;
+  onClose ? : Function;
 }
 
 let modalIndex: number = 1000;
 
+const defaultOption: IOptions = {
+  size: 'lg'
+}
+
 export class Modal {
   private source: string;
   private options: IOptions;
-  constructor(source: string, options: IOptions) {
+  constructor(source: string, options?: IOptions) {
     this.source = source;
-    this.options = options;
+    this.options = {...defaultOption, ...options};
     modalIndex++;
     this.initModal();
+
   }
 
   initModal() {
     const validSoure: boolean = (this.source.split('.').pop() as string).toLowerCase() === 'html';
 
+    if (this.options.onOpen) this.options.onOpen.call(this)
     const modal = document.createElement('modal');
     modal.className = 'modal';
     modal.setAttribute("source", `${this.source}`);
     modal.style.zIndex = modalIndex.toString();
-    modal.innerHTML = `<div class="modal-dialog">
+    modal.innerHTML = `<div class="modal-dialog ${this.options.size}">
           <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-header">
@@ -46,6 +54,7 @@ export class Modal {
 
   protected registerCloseEvent(modal: HTMLElement) {
   (modal.querySelector('[data-dismiss="modal"]') as HTMLElement).addEventListener('click', () => {
+      if (this.options.onClose) this.options.onClose.call(this)
       modal.remove();
       modalIndex--;
   });
