@@ -24,7 +24,7 @@ export class Modal {
   initModal() {
     const validSoure: boolean = (this.source.split('.').pop() as string).toLowerCase() === 'html';
 
-    if (this.options.onOpen) this.options.onOpen.call(this)
+    if (this.options.onOpen) { this.options.onOpen.call(this) };
     const modal = document.createElement('modal');
     modal.className = 'modal';
     modal.setAttribute("source", `${this.source}`);
@@ -54,7 +54,7 @@ export class Modal {
 
   protected registerCloseEvent(modal: HTMLElement) {
   (modal.querySelector('[data-dismiss="modal"]') as HTMLElement).addEventListener('click', () => {
-      if (this.options.onClose) this.options.onClose.call(this)
+      if (this.options.onClose) {this.options.onClose.call(this)};
       modal.remove();
       modalIndex--;
   });
