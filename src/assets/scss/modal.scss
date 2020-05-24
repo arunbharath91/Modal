@@ -58,7 +58,7 @@ button.close {
   background: rgba(0,0,0,0.2);
 }
 
-.modal-dialog {
+.modal-container {
   position: relative;
   width: auto;
   margin: 10px;
@@ -182,7 +182,7 @@ button.close {
   }
 }
 @media (min-width: 768px) {
-  .modal-dialog {
+  .modal-container {
     width: 600px;
     margin: 30px auto;
   }

@@ -5,7 +5,8 @@ import { Modal } from "./modal";
   new Modal('assets/templates/modal.html', {size: 'lg',
   onOpen: ()=>{
     console.log('open');
-  }
+  },
+  overlayClick: true
 });
 });
 
